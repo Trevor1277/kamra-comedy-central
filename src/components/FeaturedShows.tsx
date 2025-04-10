@@ -1,8 +1,10 @@
 
 import { Button } from '@/components/ui/button';
-import { Calendar, MapPin, Clock } from 'lucide-react';
+import { Calendar, MapPin, Clock, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { ContentLoader } from './ui/loaders/ContentLoader';
+import SectionContainer from './ui/SectionContainer';
 
 const featuredShows = [
   {
@@ -12,7 +14,11 @@ const featuredShows = [
     venue: 'Comedy Club Mumbai',
     date: 'April 24, 2025',
     time: '8:00 PM',
-    image: 'https://i.postimg.cc/SxgGrVN6/kunal-kamra-hero.png'
+    image: 'https://i.postimg.cc/SxgGrVN6/kunal-kamra-hero.png',
+    tickets: {
+      available: true,
+      remaining: 86
+    }
   },
   {
     id: '2',
@@ -21,7 +27,11 @@ const featuredShows = [
     venue: 'Delhi Laugh Factory',
     date: 'May 10, 2025',
     time: '7:30 PM',
-    image: 'https://i.postimg.cc/SxgGrVN6/kunal-kamra-hero.png'
+    image: 'https://i.postimg.cc/SxgGrVN6/kunal-kamra-hero.png',
+    tickets: {
+      available: true,
+      remaining: 42
+    }
   },
   {
     id: '3',
@@ -30,76 +40,111 @@ const featuredShows = [
     venue: 'Comedy Central Bangalore',
     date: 'May 17, 2025',
     time: '8:30 PM',
-    image: 'https://i.postimg.cc/SxgGrVN6/kunal-kamra-hero.png'
+    image: 'https://i.postimg.cc/SxgGrVN6/kunal-kamra-hero.png',
+    tickets: {
+      available: true,
+      remaining: 118
+    }
   }
 ];
 
 const FeaturedShows = () => {
-  return (
-    <section className="py-20 px-4">
-      <div className="container mx-auto">
-        <div className="text-center mb-12 content-fade-in">
-          <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-glow">Featured Shows</h2>
-          <p className="text-lg max-w-3xl mx-auto opacity-80">
-            Catch Kunal Kamra live on stage with his latest material. Book your tickets before they sell out!
-          </p>
-        </div>
+  const [loading, setLoading] = useState(false);
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 staggered-fade-in">
-          {featuredShows.map((show) => (
-            <div 
-              key={show.id} 
-              className="bg-card rounded-xl overflow-hidden shadow-lg border border-border hover-grow card-gradient"
-            >
-              <div className="h-48 overflow-hidden">
-                <img 
-                  src={show.image} 
-                  alt={show.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{show.title}</h3>
-                <h4 className="text-comedy-orange font-semibold mb-4">{show.city}</h4>
+  return (
+    <SectionContainer
+      title="Featured Shows"
+      subtitle="Catch Kunal Kamra live on stage with his latest material. Book your tickets before they sell out!"
+      className="bg-background relative"
+    >
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 overflow-hidden -z-10">
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-comedy-blue/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 left-0 w-72 h-72 bg-comedy-orange/5 rounded-full blur-3xl"></div>
+      </div>
+      
+      {loading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <ContentLoader type="card" count={3} />
+        </div>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredShows.map((show, index) => (
+              <div 
+                key={show.id}
+                className="group relative overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-comedy-purple/5 to-comedy-orange/5 opacity-0 group-hover:opacity-100 -z-10 transition-opacity duration-300"></div>
                 
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center gap-2">
-                    <MapPin size={18} className="text-muted-foreground" />
-                    <span>{show.venue}</span>
+                <div className="bg-card h-full rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:translate-y-[-5px] border border-border">
+                  <div className="relative h-48 overflow-hidden">
+                    <img 
+                      src={show.image} 
+                      alt={show.title} 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50"></div>
+                    <div className="absolute top-4 left-4 bg-comedy-orange/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-semibold">
+                      {show.tickets.remaining} tickets left
+                    </div>
+                    <div className="absolute bottom-4 right-4 bg-white/90 dark:bg-card/90 backdrop-blur-sm text-comedy-orange px-3 py-1 rounded-full text-xs font-semibold">
+                      {show.city}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar size={18} className="text-muted-foreground" />
-                    <span>{show.date}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock size={18} className="text-muted-foreground" />
-                    <span>{show.time}</span>
+                  
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold mb-2 line-clamp-1">{show.title}</h3>
+                    
+                    <div className="space-y-3 mb-6">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+                          <MapPin size={16} className="text-comedy-purple" />
+                        </div>
+                        <span className="text-sm">{show.venue}</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+                          <Calendar size={16} className="text-comedy-pink" />
+                        </div>
+                        <span className="text-sm">{show.date}</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+                          <Clock size={16} className="text-comedy-blue" />
+                        </div>
+                        <span className="text-sm">{show.time}</span>
+                      </div>
+                    </div>
+                    
+                    <Link to={`/booking/${show.id}`}>
+                      <Button className="w-full bg-gradient-to-r from-comedy-orange to-comedy-pink hover:opacity-90 transition-all duration-300 hover:shadow-lg hover:shadow-comedy-orange/20 text-white">
+                        Book Now
+                      </Button>
+                    </Link>
                   </div>
                 </div>
-                
-                <Link to={`/booking/${show.id}`}>
-                  <Button className="w-full bg-comedy-orange hover:bg-comedy-orange/90 transition-all duration-300 hover:shadow-lg hover:shadow-comedy-orange/20">
-                    Book Now
-                  </Button>
-                </Link>
               </div>
-            </div>
-          ))}
-        </div>
-        
-        <div className="text-center mt-12 scale-in" style={{ animationDelay: '0.6s' }}>
-          <Link to="/shows">
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="font-semibold transition-all duration-300 hover:bg-comedy-orange/10 hover:border-comedy-orange"
-            >
-              View All Shows
-            </Button>
-          </Link>
-        </div>
-      </div>
-    </section>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <Link to="/shows">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="font-semibold transition-all duration-300 hover:bg-comedy-orange/10 hover:border-comedy-orange group"
+              >
+                View All Shows
+                <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
+        </>
+      )}
+    </SectionContainer>
   );
 };
 

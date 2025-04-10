@@ -1,31 +1,82 @@
 
+import { useEffect, useState } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AboutContent from '@/components/AboutContent';
-import AnimatedSection from '@/components/AnimatedSection';
+import { motion } from 'framer-motion';
+import { ContentLoader } from '@/components/ui/loaders/ContentLoader';
+import SectionContainer from '@/components/ui/SectionContainer';
 
 const About = () => {
   const { isDarkTheme, toggleTheme } = useTheme();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Page transition variants
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+    },
+    in: {
+      opacity: 1,
+    },
+    out: {
+      opacity: 0,
+    },
+  };
+
+  const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: 0.5,
+  };
+
+  if (isLoading) {
+    return (
+      <div className={`min-h-screen ${isDarkTheme ? 'dark' : ''} transition-colors duration-300 bg-background`}>
+        <Navbar toggleTheme={toggleTheme} isDarkTheme={isDarkTheme} />
+        <div className="container mx-auto px-4 pt-32 pb-16">
+          <ContentLoader type="text" />
+          <div className="mt-8">
+            <ContentLoader type="image" />
+          </div>
+          <div className="mt-8">
+            <ContentLoader type="text" count={3} />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className={`min-h-screen ${isDarkTheme ? 'dark' : ''} transition-colors duration-300`}>
-      <Navbar
-        toggleTheme={toggleTheme}
-        isDarkTheme={isDarkTheme}
-      />
-      <main className="pt-28 pb-16">
-        <div className="container mx-auto px-4">
-          <AnimatedSection animation="slide-up">
-            <h1 className="font-heading text-4xl md:text-5xl font-bold mb-8 gradient-text">About Kunal</h1>
-          </AnimatedSection>
-          <AnimatedSection animation="fade-in" delay={300}>
-            <AboutContent />
-          </AnimatedSection>
-        </div>
+    <motion.div 
+      className={`min-h-screen ${isDarkTheme ? 'dark' : ''} transition-colors duration-300 bg-background`}
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransition}
+    >
+      <Navbar toggleTheme={toggleTheme} isDarkTheme={isDarkTheme} />
+      <main className="pt-20">
+        <SectionContainer
+          title="About Kunal"
+          className="pt-20"
+        >
+          <AboutContent />
+        </SectionContainer>
       </main>
       <Footer />
-    </div>
+    </motion.div>
   );
 };
 
