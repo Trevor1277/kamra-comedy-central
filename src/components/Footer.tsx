@@ -1,11 +1,8 @@
 
+import { Link } from 'react-router-dom';
 import { Instagram, Twitter, Youtube, Mail } from 'lucide-react';
 
-interface FooterProps {
-  language: string;
-}
-
-const Footer = ({ language }: FooterProps) => {
+const Footer = () => {
   return (
     <footer className="bg-comedy-dark text-white py-12">
       <div className="container mx-auto px-4">
@@ -15,9 +12,7 @@ const Footer = ({ language }: FooterProps) => {
               Kunal Kamra
             </h3>
             <p className="text-sm opacity-75 mb-4">
-              {language === 'en' 
-                ? "India's bold and unapologetic political satirist and stand-up comedian."
-                : "भारत के साहसी और बेबाक राजनीतिक व्यंग्यकार और स्टैंड-अप कॉमेडियन।"}
+              India's bold and unapologetic political satirist and stand-up comedian.
             </p>
             <div className="flex space-x-4">
               <a href="https://www.instagram.com/kuna_kamra" target="_blank" rel="noreferrer" className="hover:text-comedy-orange transition-colors">
@@ -36,44 +31,41 @@ const Footer = ({ language }: FooterProps) => {
           </div>
 
           <div>
-            <h4 className="font-heading font-bold mb-4">
-              {language === 'en' ? 'Quick Links' : 'त्वरित लिंक'}
-            </h4>
+            <h4 className="font-heading font-bold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#shows" className="hover:text-comedy-orange transition-colors">
-                  {language === 'en' ? 'Upcoming Shows' : 'आगामी शो'}
-                </a>
+                <Link to="/" className="hover:text-comedy-orange transition-colors">
+                  Home
+                </Link>
               </li>
               <li>
-                <a href="#videos" className="hover:text-comedy-orange transition-colors">
-                  {language === 'en' ? 'Videos' : 'वीडियोस'}
-                </a>
+                <Link to="/shows" className="hover:text-comedy-orange transition-colors">
+                  Upcoming Shows
+                </Link>
               </li>
               <li>
-                <a href="#about" className="hover:text-comedy-orange transition-colors">
-                  {language === 'en' ? 'About Kunal' : 'कुणाल के बारे में'}
-                </a>
+                <Link to="/videos" className="hover:text-comedy-orange transition-colors">
+                  Videos
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="hover:text-comedy-orange transition-colors">
+                  About Kunal
+                </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-heading font-bold mb-4">
-              {language === 'en' ? 'Contact' : 'संपर्क'}
-            </h4>
-            <p className="mb-2 text-sm">
-              {language === 'en' ? 'For bookings:' : 'शो बुकिंग के लिए:'}
-            </p>
+            <h4 className="font-heading font-bold mb-4">Contact</h4>
+            <p className="mb-2 text-sm">For bookings:</p>
             <a 
               href="mailto:bookings@kunalkamra.com" 
               className="hover:text-comedy-orange transition-colors"
             >
               bookings@kunalkamra.com
             </a>
-            <p className="mt-4 mb-2 text-sm">
-              {language === 'en' ? 'For media inquiries:' : 'मीडिया पूछताछ के लिए:'}
-            </p>
+            <p className="mt-4 mb-2 text-sm">For media inquiries:</p>
             <a 
               href="mailto:media@kunalkamra.com" 
               className="hover:text-comedy-orange transition-colors"
@@ -84,9 +76,7 @@ const Footer = ({ language }: FooterProps) => {
         </div>
 
         <div className="border-t border-white/10 mt-10 pt-6 text-center text-sm opacity-75">
-          <p>
-            © {new Date().getFullYear()} {language === 'en' ? 'Kunal Kamra. All rights reserved.' : 'कुणाल कामरा। सर्वाधिकार सुरक्षित।'}
-          </p>
+          <p>© {new Date().getFullYear()} Kunal Kamra. All rights reserved.</p>
         </div>
       </div>
     </footer>
