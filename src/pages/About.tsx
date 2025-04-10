@@ -70,7 +70,10 @@ const About = () => {
       <main className="pt-20">
         <SectionContainer
           title="About Kunal"
+          subtitle="One of India's most recognized comedians, known for his sharp political satire and fearless commentary"
           className="pt-20"
+          maxWidth="4xl"
+          spacing="md"
         >
           <AboutContent />
         </SectionContainer>

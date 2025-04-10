@@ -69,6 +69,7 @@ const Videos = () => {
           title="Videos"
           subtitle="Watch Kunal's most popular stand-up clips, interviews, and podcast episodes. Subscribe to his YouTube channel for regular updates and fresh content."
           className="pt-20"
+          maxWidth="6xl"
         >
           <VideosGrid />
         </SectionContainer>
