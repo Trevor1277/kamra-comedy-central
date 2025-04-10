@@ -76,6 +76,7 @@
 
   body {
     @apply bg-background text-foreground font-sans;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -99,6 +100,7 @@
   }
 }
 
+/* Enhanced animations */
 @keyframes bounce {
   0%, 100% {
     transform: translateY(0);
@@ -106,4 +108,136 @@
   50% {
     transform: translateY(-5px);
   }
+}
+
+@keyframes floatingAnimation {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.floating {
+  animation: floatingAnimation 6s ease-in-out infinite;
+}
+
+.pulse-animate {
+  animation: pulse-soft 2s infinite;
+}
+
+.shimmer {
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0) 0%, 
+    rgba(255,255,255,0.2) 50%, 
+    rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+.bounce-once {
+  animation: bounce 1s ease-out forwards;
+}
+
+/* Shared transitions */
+.page-transition {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.hover-lift {
+  @apply transition-transform duration-300 ease-out hover:-translate-y-1;
+}
+
+.hover-grow {
+  @apply transition-transform duration-300 hover:scale-[1.03];
+}
+
+.content-fade-in {
+  @apply opacity-0;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.staggered-fade-in > * {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.staggered-fade-in > *:nth-child(1) { animation-delay: 0.1s; }
+.staggered-fade-in > *:nth-child(2) { animation-delay: 0.2s; }
+.staggered-fade-in > *:nth-child(3) { animation-delay: 0.3s; }
+.staggered-fade-in > *:nth-child(4) { animation-delay: 0.4s; }
+.staggered-fade-in > *:nth-child(5) { animation-delay: 0.5s; }
+.staggered-fade-in > *:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+/* Modern text effects */
+.text-shadow {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.text-glow {
+  text-shadow: 0 0 10px currentColor;
+}
+
+.card-gradient {
+  background: linear-gradient(135deg, rgba(255, 93, 46, 0.1) 0%, rgba(108, 34, 166, 0.1) 100%);
 }

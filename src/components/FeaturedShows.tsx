@@ -2,6 +2,7 @@
 import { Button } from '@/components/ui/button';
 import { Calendar, MapPin, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const featuredShows = [
   {
@@ -37,24 +38,24 @@ const FeaturedShows = () => {
   return (
     <section className="py-20 px-4">
       <div className="container mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">Featured Shows</h2>
+        <div className="text-center mb-12 content-fade-in">
+          <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-glow">Featured Shows</h2>
           <p className="text-lg max-w-3xl mx-auto opacity-80">
             Catch Kunal Kamra live on stage with his latest material. Book your tickets before they sell out!
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 staggered-fade-in">
           {featuredShows.map((show) => (
             <div 
               key={show.id} 
-              className="bg-card rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border border-border"
+              className="bg-card rounded-xl overflow-hidden shadow-lg border border-border hover-grow card-gradient"
             >
               <div className="h-48 overflow-hidden">
                 <img 
                   src={show.image} 
                   alt={show.title} 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                 />
               </div>
               <div className="p-6">
@@ -77,7 +78,7 @@ const FeaturedShows = () => {
                 </div>
                 
                 <Link to={`/booking/${show.id}`}>
-                  <Button className="w-full bg-comedy-orange hover:bg-comedy-orange/90">
+                  <Button className="w-full bg-comedy-orange hover:bg-comedy-orange/90 transition-all duration-300 hover:shadow-lg hover:shadow-comedy-orange/20">
                     Book Now
                   </Button>
                 </Link>
@@ -86,9 +87,13 @@ const FeaturedShows = () => {
           ))}
         </div>
         
-        <div className="text-center mt-12">
+        <div className="text-center mt-12 scale-in" style={{ animationDelay: '0.6s' }}>
           <Link to="/shows">
-            <Button variant="outline" size="lg" className="font-semibold">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="font-semibold transition-all duration-300 hover:bg-comedy-orange/10 hover:border-comedy-orange"
+            >
               View All Shows
             </Button>
           </Link>

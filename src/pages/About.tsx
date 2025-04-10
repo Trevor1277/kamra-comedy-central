@@ -1,35 +1,27 @@
 
-import { useState } from 'react';
-import { useToast } from '@/components/ui/use-toast';
+import { useTheme } from '@/contexts/ThemeContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AboutContent from '@/components/AboutContent';
+import AnimatedSection from '@/components/AnimatedSection';
 
 const About = () => {
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
-  const { toast } = useToast();
-  
-  const toggleTheme = () => {
-    const newTheme = !isDarkTheme;
-    setIsDarkTheme(newTheme);
-    document.documentElement.classList.toggle('dark', newTheme);
-    
-    toast({
-      title: `Switched to ${newTheme ? 'dark' : 'light'} mode`,
-      duration: 2000,
-    });
-  };
+  const { isDarkTheme, toggleTheme } = useTheme();
 
   return (
-    <div className={`min-h-screen ${isDarkTheme ? 'dark' : ''}`}>
+    <div className={`min-h-screen ${isDarkTheme ? 'dark' : ''} transition-colors duration-300`}>
       <Navbar
         toggleTheme={toggleTheme}
         isDarkTheme={isDarkTheme}
       />
       <main className="pt-28 pb-16">
         <div className="container mx-auto px-4">
-          <h1 className="font-heading text-4xl md:text-5xl font-bold mb-8 gradient-text">About Kunal</h1>
-          <AboutContent />
+          <AnimatedSection animation="slide-up">
+            <h1 className="font-heading text-4xl md:text-5xl font-bold mb-8 gradient-text">About Kunal</h1>
+          </AnimatedSection>
+          <AnimatedSection animation="fade-in" delay={300}>
+            <AboutContent />
+          </AnimatedSection>
         </div>
       </main>
       <Footer />

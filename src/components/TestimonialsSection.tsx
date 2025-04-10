@@ -23,18 +23,18 @@ const TestimonialsSection = () => {
   return (
     <section className="py-20 px-4 bg-muted/50">
       <div className="container mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">What Fans Are Saying</h2>
+        <div className="text-center mb-12 content-fade-in">
+          <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4 text-glow">What Fans Are Saying</h2>
           <p className="text-lg max-w-3xl mx-auto opacity-80">
             Don't just take our word for it. Here's what audiences have to say about Kunal's live shows.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 staggered-fade-in">
           {testimonials.map((testimonial, index) => (
             <div 
               key={index} 
-              className="bg-background rounded-xl p-6 shadow-md border border-border"
+              className="bg-background rounded-xl p-6 shadow-md border border-border hover-lift"
             >
               <QuoteIcon size={32} className="text-comedy-orange mb-4" />
               <p className="italic mb-6">{testimonial.comment}</p>
@@ -46,7 +46,7 @@ const TestimonialsSection = () => {
           ))}
         </div>
 
-        <div className="mt-16 p-8 bg-comedy-orange/10 rounded-xl border border-comedy-orange/20 max-w-4xl mx-auto">
+        <div className="mt-16 p-8 bg-comedy-orange/10 rounded-xl border border-comedy-orange/20 max-w-4xl mx-auto scale-in" style={{ animationDelay: '0.8s' }}>
           <p className="text-xl font-medium italic text-center">
             "I believe comedy is a powerful tool to discuss important issues in society. 
             If you can make someone laugh while making them think, you've won half the battle."
