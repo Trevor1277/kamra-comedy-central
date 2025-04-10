@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -62,27 +61,12 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				},
-				comedy: {
-					orange: '#FF5D2E',
-					purple: '#6C22A6',
-					blue: '#00D4FF',
-					pink: '#FF36AB',
-					dark: '#1A1223',
-					light: '#FCF7FF'
-				},
+				}
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
-			},
-			fontFamily: {
-				sans: ['Inter', 'sans-serif'],
-				heading: ['Poppins', 'sans-serif'],
-			},
-			boxShadow: {
-				glow: '0 0 10px 5px rgba(255, 54, 171, 0.3)',
 			},
 			keyframes: {
 				'accordion-down': {
@@ -100,40 +84,11 @@ export default {
 					to: {
 						height: '0'
 					}
-				},
-				'pulse-glow': {
-					'0%, 100%': {
-						boxShadow: '0 0 12px 6px rgba(255, 93, 46, 0.4)'
-					},
-					'50%': {
-						boxShadow: '0 0 24px 10px rgba(255, 93, 46, 0.7)'
-					}
-				},
-				'bounce-subtle': {
-					'0%, 100%': {
-						transform: 'translateY(0)'
-					},
-					'50%': {
-						transform: 'translateY(-10px)'
-					}
-				},
-				'slide-up': {
-					'0%': {
-						transform: 'translateY(20px)',
-						opacity: '0'
-					},
-					'100%': {
-						transform: 'translateY(0)',
-						opacity: '1'
-					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out',
-				'pulse-glow': 'pulse-glow 2s infinite',
-				'bounce-subtle': 'bounce-subtle 3s ease-in-out infinite',
-				'slide-up': 'slide-up 0.5s ease-out forwards'
+				'accordion-up': 'accordion-up 0.2s ease-out'
 			}
 		}
 	},
